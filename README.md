@@ -2,7 +2,7 @@
 
 # normfluodbf\_ ShinyApp
 
-[![Project Status](https://www.repostatus.org/badges/latest/wip.svg)](https://github.com/AlphaPrime7/normfluodbf_ShinyApp/graphs/commit-activity)
+[![Project Status](https://www.repostatus.org/badges/latest/wip.svg)](https://github.com/AlphaPrime7/normfluodbf_ShinyApp/graphs/contributors)
 
 -   normfluodbf_ShinyApp is to an extension of the normfluodbf package.
 
