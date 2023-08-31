@@ -7,5 +7,6 @@
 -   normfluodbf_ShinyApp is to an extension of the normfluodbf package.
 
 #Updates and maintainace 
+- Update the table type using library(DT)
 - There is an update coming for the multiplot
 - There is an update coming for QC on choosing samples
