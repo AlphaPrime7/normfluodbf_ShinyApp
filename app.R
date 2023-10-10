@@ -10,6 +10,7 @@ library(ggplot2)
 library(ggdark)
 library(ggthemes)
 library(plotly)
+library(normfluodbf)
 #library(magick)
 #library(reactable)
 
@@ -25,7 +26,7 @@ ui <- fluidPage(
     tabPanel("Import .dbf file", 
              sidebarPanel(
                timeInput("time1", "Time:", value = Sys.time()),
-               fileInput("dbf_file", NULL, accept = c(".dbf"), buttonLabel = "Upload..."),
+               fileInput("dbfordat", NULL, accept = c(".dbf", ".dat"), buttonLabel = "Upload...", multiple = FALSE),
                numericInput("rows", "Rows to preview", value = 5, min = 1, step = 1),
                textInput("delim", "Delimiter (leave blank to guess)", ""),
                downloadButton("download", "Download .csv"), width = 3),
@@ -90,15 +91,17 @@ server <- function(input, output, session) {
   observe(print(strftime(input$time1, "%T")))
   
   csv_input <- reactive({
-    req(input$dbf_file)
-    ext <- tools::file_ext(input$dbf_file$name)
+    req(input$dbfordat)
+    
+    ext <- tools::file_ext(input$dbfordat$name)
     switch(ext,
-           dbf = foreign::read.dbf(input$dbf_file$datapath),
-           validate("Invalid file; Please upload a .dbf file"))})
+           dbf = foreign::read.dbf(input$dbfordat$datapath),
+           dat = read.table(input$dbfordat$datapath),
+           validate("Invalid file; Please upload a .dbf file or .dat file"))})
   
   output$download <- downloadHandler(
     filename = function() {
-      paste0(input$dbf_file, ".csv")},
+      paste0(input$dbfordat, ".csv")},
     content = function(file){
       write.csv(csv_input(), file)})
   
