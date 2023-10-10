@@ -23,10 +23,14 @@ ui <- fluidPage(
   tabsetPanel(
     id = "tabset",
     #TAB1
-    tabPanel("Import .dbf file", 
+    tabPanel("Import .dbf or .dat file", 
              sidebarPanel(
                timeInput("time1", "Time:", value = Sys.time()),
                fileInput("dbfordat", NULL, accept = c(".dbf", ".dat"), buttonLabel = "Upload...", multiple = FALSE),
+               numericInput("tnp", "DAT file number of sample types", value = ""),
+               numericInput("cycles", "DAT file number of cycles", value = ""),
+               textInput("ru", "Letters of Rows used", ""),
+               textInput("cu", "Numbers of Out of Sequence columns used(,)", ""),
                numericInput("rows", "Rows to preview", value = 5, min = 1, step = 1),
                textInput("delim", "Delimiter (leave blank to guess)", ""),
                downloadButton("download", "Download .csv"), width = 3),
@@ -119,15 +123,19 @@ server <- function(input, output, session) {
   
   output$text <- renderPrint({
     if(input$data_view == 'none'){
-      "Hello Fellow Data Nerd and Fun Wanabee, 
+      suppressWarnings(print("Hello Fellow Data Nerd and Fun Wanabee, 
     \n let the program get some rest as there 
     is nothing to show here and you 
-    have no clue what a dbf file is"}
+    have no clue what a dbf file is"))
+    }
   })
   
   output$head_norm <- renderTable({ #places the output in a reactive component without messing the list
-    if(input$data_view == 'raw'){
-      head(dbf_norm(), input$rows_tab2)}
+    if(input$data_view == 'raw' || input$dbfordat == '.dbf'){
+      head(dbf_norm(), input$rows_tab2)
+    } else if(input$data_view == 'raw' || input$dbfordat == '.dat'){
+        head(normfluodat(input$dbfordat$datapath), input$rows_tab2)
+      }
   })
   
   output$summary <- renderPrint({
