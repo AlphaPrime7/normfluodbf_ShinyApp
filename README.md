@@ -17,9 +17,6 @@ Status](https://www.repostatus.org/badges/latest/wip.svg)](https://github.com/Al
 Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Awesome
 Badges](https://img.shields.io/badge/badges-awesome-green.svg)](https://github.com/Naereen/badges)
-[![saythanks](https://img.shields.io/badge/say-thanks-ff69b4.svg)](mailto:awesome.tingwei@outlook.com)
-[![THANK
-YOU](https://img.shields.io/badge/THANK-YOU-ff69b4.svg)](mailto:awesome.tingwei@outlook.com)
 [![Attribution-NonCommercial-ShareAlike](https://licensebuttons.net/i/l/by-nc-sa/000000/ff/ff/ff/88x31.png)](https://creativecommons.org/licenses/by-nc-sa/2.0/)
 
 - normfluodbf_ShinyApp is to an extension of the normfluodbf package.
